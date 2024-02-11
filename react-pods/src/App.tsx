@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import Navbar from './Navbar.tsx'
+import Navbar from './components/navbar/Navbar.tsx'
 import './App.css'
+import FeedReader from './components/feedReader/FeedReader.tsx'
 
 function App() {
 
@@ -13,6 +14,9 @@ function App() {
     <>
       <div className='react-pods'>
       <Navbar />
+        <div className='selection-viewer'>
+          <FeedReader />
+        </div>
       </div>
     </>
   )
