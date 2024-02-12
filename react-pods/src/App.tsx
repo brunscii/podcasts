@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import Navbar from './components/navbar/Navbar.tsx'
 import './App.css'
 import FeedReader from './components/feedReader/FeedReader.tsx'
+import DownloadDisplay from './components/downloadsDisplay/DownloadDisplay.tsx'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <Navbar />
         <div className='selection-viewer'>
           <FeedReader />
+          <DownloadDisplay className='inactive' />
         </div>
       </div>
     </>
