@@ -1,7 +1,8 @@
 interface RSSInfoSectionProps{
   title: string;
   description: string;
-  imageUrl: string;
+  imageUrl?: string;
+  pubDate: string;
   episodes?: {
     title: string;
     pubDate: string;
