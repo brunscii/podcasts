@@ -7,6 +7,7 @@ interface RSSInfo {
   title : string;
   pubDate: string;
   summary: string;
+  imageUrl: string;
   episodes: {
     title : string;
     description: string;
@@ -21,12 +22,25 @@ function isValidRss( url : string ){
 
 }
 
-function readRSS( url : string ) : RSSInfo{
+async function readRSS( url : string ) : Promise<RSSInfo>{
+
+  const rssRes = await fetch(url)
+  const rssXML = await rssRes.text()
+
+  const parser = new DOMParser()
+  const rssData = parser.parseFromString(rssXML, 'text/xml')
+
+  
+
+  console.log(rssData)
+
   return {
-    title: 'Hello RSS',
-    pubDate: 'asdf',
-    summary: 'This is the sample',
-    episodes: [ 
+    title: rssData.querySelector('title')?.textContent || 'No Title Data',
+    pubDate: rssData.querySelector('pubDate')?.textContent || 'N/A',
+    summary: rssData.querySelector('summary')?.textContent || '',
+    imageUrl: rssData.querySelector('image>url')?.textContent || '',
+    episodes: 
+    [ 
       {
         title: 'Inner element',
         description: 'asdfasdf',
@@ -36,6 +50,7 @@ function readRSS( url : string ) : RSSInfo{
       }
     ]
   }
+
 }
 
 function FeedReader() {
@@ -54,8 +69,9 @@ function FeedReader() {
 
             // test if a valid rss or not
             // Read in RSS from inputUrl's address
-            let rssData = readRSS('google.com')
-            setRssInfoComponent( (prevComponents) => [...prevComponents, <RSSInfoSection title={rssData.title} description={rssData.summary} pubDate={rssData.pubDate}/> ])
+            readRSS(inputUrl).then( (rssData) => {
+              setRssInfoComponent( (prevComponents) => [...prevComponents, <RSSInfoSection title={rssData.title} description={rssData.summary} pubDate={rssData.pubDate} imageUrl={rssData.imageUrl} /> ])
+            })
             console.log('asdfasdf')
           }}
 
@@ -65,8 +81,10 @@ function FeedReader() {
 
           onKeyDown={(e)=>{
             if( e.key == 'Enter'){
-              let rssData = readRSS('google.com')
-              setRssInfoComponent( (prevComponents) => [ <RSSInfoSection title={rssData.title} description={rssData.summary} pubDate={rssData.pubDate}/> ])
+              let rssData = readRSS(inputUrl)
+              readRSS(inputUrl).then( (rssData) => {
+                setRssInfoComponent( (prevComponents) => [ <RSSInfoSection title={rssData.title} description={rssData.summary} pubDate={rssData.pubDate} imageUrl={rssData.imageUrl} /> ])
+              })
               console.log('asdfasdf')
             }
           }}

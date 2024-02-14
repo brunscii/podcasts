@@ -15,11 +15,13 @@ function RSSInfoSection( props : RSSInfoSectionProps ){
 
   return (
     <>
-    <div className="RSSInfoBox">
-      <h3>{props.title}</h3>
+    <div className="rss-info-box">
+      <h2>{props.title}</h2>
+      <span>{ (new Date(props.pubDate) ).toUTCString() }</span>
+      <br />
       <span>{props.description}</span>
-      <img src={props.imageUrl} alt="" />
-
+      <img src={props.imageUrl} alt="podcast IMG" className="rss-info-image" />
+      
     </div>
     </>
   )

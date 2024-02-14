@@ -2,6 +2,7 @@
   max-width: 100dw;
   display: block;
   height: 100%;
+  overflow: hidden;
 }
 
 .react-pods {
@@ -9,6 +10,7 @@
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 8fr;
+  /* overflow: scroll; */
 }
 
 .selection-viewer {

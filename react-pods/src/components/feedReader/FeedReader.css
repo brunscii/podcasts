@@ -2,7 +2,7 @@
   /* display: grid; */
   /* place-items: center; */
   position:absolute;
-  left: 40dvw;
+  /* left: 40dvw; */
   top: 50dvh;
   /* height: 100vh; */
   /* width: 100%; */
@@ -12,4 +12,17 @@
 
 label{
   display: block;
+}
+
+.rss-info-image{
+  margin: 2em;
+  aspect-ratio: 1;
+  width: 12em;
+}
+
+.rss-info-box{
+  display: flex;
+  max-height: 40vh;
+  flex-direction: column;
+  overflow-y: auto;
 }
