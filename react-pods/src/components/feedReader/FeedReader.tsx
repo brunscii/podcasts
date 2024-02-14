@@ -28,17 +28,17 @@ async function readRSS( url : string ) : Promise<RSSInfo>{
   const rssXML = await rssRes.text()
 
   const parser = new DOMParser()
-  const rssData = parser.parseFromString(rssXML, 'text/xml')
+  const rssData = parser.parseFromString(rssXML, 'application/xhtml+xml')
 
   
 
   console.log(rssData)
 
   return {
-    title: rssData.querySelector('title')?.textContent || 'No Title Data',
-    pubDate: rssData.querySelector('pubDate')?.textContent || 'N/A',
-    summary: rssData.querySelector('summary')?.textContent || '',
-    imageUrl: rssData.querySelector('image>url')?.textContent || '',
+    title: rssData.querySelector('channel>title')?.textContent || 'No Title Data',
+    pubDate: rssData.querySelector('channel>pubDate')?.textContent || 'N/A',
+    summary: rssData.querySelector('channel>summary')?.textContent || '',
+    imageUrl: rssData.querySelector('channel>image>url')?.textContent || '',
     episodes: 
     [ 
       {
@@ -81,11 +81,11 @@ function FeedReader() {
 
           onKeyDown={(e)=>{
             if( e.key == 'Enter'){
-              let rssData = readRSS(inputUrl)
+              let rssData = readRSS(inputUrl)              
+              document.querySelector('.rss-input-box')?.classList.add('topped')
               readRSS(inputUrl).then( (rssData) => {
                 setRssInfoComponent( (prevComponents) => [ <RSSInfoSection title={rssData.title} description={rssData.summary} pubDate={rssData.pubDate} imageUrl={rssData.imageUrl} /> ])
               })
-              console.log('asdfasdf')
             }
           }}
         />

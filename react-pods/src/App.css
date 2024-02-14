@@ -9,11 +9,12 @@
   max-width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 8fr;
+  grid-template-columns: auto 8fr;
   /* overflow: scroll; */
 }
 
 .selection-viewer {
+  padding: 2em;
   display:block;
   max-width: 100%;
 }
