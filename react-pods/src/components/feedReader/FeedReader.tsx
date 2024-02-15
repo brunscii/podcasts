@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./FeedReader.css"
 import RSSInfoSection from "./RSSInfoSection"
 import React from "react";
+import EpisodeListItem from "./EpisodeListItem";
 
 interface RSSInfo {
   title : string;
@@ -29,7 +30,12 @@ async function readRSS( url : string ) : Promise<RSSInfo>{
 
   const parser = new DOMParser()
   const rssData = parser.parseFromString(rssXML, 'application/xhtml+xml')
+  const eps = rssData.querySelectorAll('item')
 
+  const episodes = []
+  for( let ep in eps.entries ){
+    console.log(ep)
+  }
   
 
   console.log(rssData)
@@ -39,6 +45,8 @@ async function readRSS( url : string ) : Promise<RSSInfo>{
     pubDate: rssData.querySelector('channel>pubDate')?.textContent || 'N/A',
     summary: rssData.querySelector('channel>summary')?.textContent || '',
     imageUrl: rssData.querySelector('channel>image>url')?.textContent || '',
+
+
     episodes: 
     [ 
       {
@@ -57,24 +65,19 @@ function FeedReader() {
 
   const [inputUrl, setInputUrl] = useState('');
   const [rssInfoComponent, setRssInfoComponent] = useState<JSX.Element[]>([]);
+  const [rssEpisodes, setRssEpisodes] = useState<JSX.Element[]>([]);
 
   return (
     <>
     <div className='rss-input-box' >
       <div className="rss-input">
         <label htmlFor="rss-input">Enter a RSS URL</label>
-        <input title="rss-input" type="url" name="rss-input" id="rss-input" placeholder="rss.website.com" value={inputUrl} 
-          onSubmit={ (e)=>{
-            e.preventDefault();
+        <input title="rss-input" type="url" name="rss-input" id="rss-input" placeholder="https://feed.syntax.fm/rss" value={inputUrl || 'https://feed.syntax.fm/rss'} 
 
-            // test if a valid rss or not
-            // Read in RSS from inputUrl's address
-            readRSS(inputUrl).then( (rssData) => {
-              setRssInfoComponent( (prevComponents) => [...prevComponents, <RSSInfoSection title={rssData.title} description={rssData.summary} pubDate={rssData.pubDate} imageUrl={rssData.imageUrl} /> ])
-            })
-            console.log('asdfasdf')
+          onFocus={(e)=>{
+            e.preventDefault()
+            setInputUrl(e.target.value)
           }}
-
           onChange={(e)=>{
             setInputUrl(e.target.value)
           }}
@@ -85,6 +88,7 @@ function FeedReader() {
               document.querySelector('.rss-input-box')?.classList.add('topped')
               readRSS(inputUrl).then( (rssData) => {
                 setRssInfoComponent( (prevComponents) => [ <RSSInfoSection title={rssData.title} description={rssData.summary} pubDate={rssData.pubDate} imageUrl={rssData.imageUrl} /> ])
+                
               })
             }
           }}
@@ -92,6 +96,7 @@ function FeedReader() {
       </div>
       <div className="rss-content">
         {rssInfoComponent}
+        {rssEpisodes}
       </div>
     </div>
     </>

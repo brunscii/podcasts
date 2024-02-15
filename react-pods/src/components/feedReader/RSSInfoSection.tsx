@@ -1,3 +1,5 @@
+import EpisodeListItem from "./EpisodeListItem";
+
 interface RSSInfoSectionProps{
   title: string;
   description: string;
@@ -23,6 +25,7 @@ function RSSInfoSection( props : RSSInfoSectionProps ){
       <img src={props.imageUrl} alt="podcast IMG" className="rss-info-image" />
       
     </div>
+   
     </>
   )
 
