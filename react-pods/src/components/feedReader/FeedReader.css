@@ -9,6 +9,12 @@
   }
 }
 
+.rss-episode-list {
+  color:inherit;
+  overflow-y: auto;
+  display: block;
+}
+
 .rss-input-box {
   /* display: grid; */
   /* place-items: center; */
@@ -40,4 +46,10 @@ label{
   max-height: 100%;
   flex-direction: column;
   overflow-y: auto;
+}
+
+.episode-list-item{
+  max-height: 10rem;
+  overflow: hidden;
+
 }

@@ -18,7 +18,7 @@ ul {
   /* align-content: center; */
 }
 
-ul>li {
+.navbar>ul>li {
   min-width: 7rem;
   width: 100%;
   height: 100%;
@@ -28,6 +28,6 @@ ul>li {
   justify-content: center;
 }
 
-ul>li:hover {
+.navbar>ul>li:hover {
   background-color: darkgreen;
 }

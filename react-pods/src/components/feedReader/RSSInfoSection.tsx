@@ -1,15 +1,11 @@
-import EpisodeListItem from "./EpisodeListItem";
+import EpisodeListItem, { EpisodeListItemProps } from "./EpisodeListItem";
 
 interface RSSInfoSectionProps{
   title: string;
   description: string;
   imageUrl?: string;
   pubDate: string;
-  episodes?: {
-    title: string;
-    pubDate: string;
-    link: string;
-  }[];
+  episodes?: EpisodeListItemProps[];
 }
 
 
@@ -24,6 +20,13 @@ function RSSInfoSection( props : RSSInfoSectionProps ){
       <span>{props.description}</span>
       <img src={props.imageUrl} alt="podcast IMG" className="rss-info-image" />
       
+    </div>
+    <div className="rss-episode-list">
+      {
+        props.episodes?.map( (episode)=>{
+          return (<EpisodeListItem title={episode.title} desription={episode.desription} pubDate={episode.pubDate} url={episode.url} image={episode.image} />)
+        })
+      }
     </div>
    
     </>

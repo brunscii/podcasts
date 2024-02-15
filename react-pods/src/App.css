@@ -17,4 +17,5 @@
   padding: 2em;
   display:block;
   max-width: 100%;
+  overflow-y: auto;
 }

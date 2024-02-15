@@ -2,20 +2,14 @@ import { useState } from "react";
 import "./FeedReader.css"
 import RSSInfoSection from "./RSSInfoSection"
 import React from "react";
-import EpisodeListItem from "./EpisodeListItem";
+import {EpisodeListItemProps} from "./EpisodeListItem";
 
 interface RSSInfo {
   title : string;
   pubDate: string;
   summary: string;
   imageUrl: string;
-  episodes: {
-    title : string;
-    description: string;
-    pubDate: string;
-    duration: string;
-    imageLink: string;
-  }[]
+  episodes: EpisodeListItemProps[]
 }
 
 function isValidRss( url : string ){
@@ -30,15 +24,24 @@ async function readRSS( url : string ) : Promise<RSSInfo>{
 
   const parser = new DOMParser()
   const rssData = parser.parseFromString(rssXML, 'application/xhtml+xml')
-  const eps = rssData.querySelectorAll('item')
+  const eps = rssData.querySelectorAll('channel>item')
 
-  const episodes = []
-  for( let ep in eps.entries ){
-    console.log(ep)
-  }
+  const episodes : EpisodeListItemProps[] = []
+  eps.forEach( e => {
+    console.log(e.querySelector('description')?.textContent)
+    episodes.push({
+      title : e.querySelector('title')?.textContent || '',
+      desription: e.querySelector('description')?.textContent || '',
+      url: e.querySelector('enclosure')?.textContent || '',
+
+
+    })
+    console.log(e)
+  })
+
   
 
-  console.log(rssData)
+  // console.log(rssData)
 
   return {
     title: rssData.querySelector('channel>title')?.textContent || 'No Title Data',
@@ -47,16 +50,8 @@ async function readRSS( url : string ) : Promise<RSSInfo>{
     imageUrl: rssData.querySelector('channel>image>url')?.textContent || '',
 
 
-    episodes: 
-    [ 
-      {
-        title: 'Inner element',
-        description: 'asdfasdf',
-        pubDate: '',
-        duration: '',
-        imageLink: ''
-      }
-    ]
+    episodes: episodes
+    
   }
 
 }
@@ -87,7 +82,7 @@ function FeedReader() {
               let rssData = readRSS(inputUrl)              
               document.querySelector('.rss-input-box')?.classList.add('topped')
               readRSS(inputUrl).then( (rssData) => {
-                setRssInfoComponent( (prevComponents) => [ <RSSInfoSection title={rssData.title} description={rssData.summary} pubDate={rssData.pubDate} imageUrl={rssData.imageUrl} /> ])
+                setRssInfoComponent( (prevComponents) => [ <RSSInfoSection title={rssData.title} description={rssData.summary} pubDate={rssData.pubDate} imageUrl={rssData.imageUrl} episodes={rssData.episodes}  /> ])
                 
               })
             }
@@ -96,7 +91,9 @@ function FeedReader() {
       </div>
       <div className="rss-content">
         {rssInfoComponent}
-        {rssEpisodes}
+        <div className="rss-episode-list">
+          {rssEpisodes}
+        </div>
       </div>
     </div>
     </>
