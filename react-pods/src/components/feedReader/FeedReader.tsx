@@ -28,11 +28,13 @@ async function readRSS( url : string ) : Promise<RSSInfo>{
 
   const episodes : EpisodeListItemProps[] = []
   eps.forEach( e => {
-    console.log(e.querySelector('description')?.textContent)
+    // console.log(e.textContent)
     episodes.push({
       title : e.querySelector('title')?.textContent || '',
       desription: e.querySelector('description')?.textContent || '',
       url: e.querySelector('enclosure')?.textContent || '',
+      pubDate: e.querySelector('pubDate')?.textContent || '',
+      image: e.querySelector('itunes\\:image')?.getAttribute('href')?.toString() || ''
 
 
     })
