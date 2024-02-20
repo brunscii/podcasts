@@ -17,7 +17,6 @@ interface DownloadDisplayProps {
 function DownloadDisplay( props : DownloadDisplayProps ) {
   
 
-
   return (
     <div className = { props.className ? props.className : ''}>
 

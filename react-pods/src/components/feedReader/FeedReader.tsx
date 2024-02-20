@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./FeedReader.css"
 import RSSInfoSection from "./RSSInfoSection"
 import React from "react";
@@ -60,6 +60,8 @@ async function readRSS( url : string ) : Promise<RSSInfo>{
 
 function FeedReader() {
 
+  const rssPlaceHolder = "https://feed.syntax.fm/rss"
+
   const [inputUrl, setInputUrl] = useState('');
   const [rssInfoComponent, setRssInfoComponent] = useState<JSX.Element[]>([]);
   const [rssEpisodes, setRssEpisodes] = useState<JSX.Element[]>([]);
@@ -69,11 +71,10 @@ function FeedReader() {
     <div className='rss-input-box' >
       <div className="rss-input">
         <label htmlFor="rss-input">Enter a RSS URL</label>
-        <input title="rss-input" type="url" name="rss-input" id="rss-input" placeholder="https://feed.syntax.fm/rss" value={inputUrl || 'https://feed.syntax.fm/rss'} 
+        <input title="rss-input" type="url" name="rss-input" id="rss-input" placeholder={rssPlaceHolder} value={inputUrl} 
 
           onFocus={(e)=>{
-            e.preventDefault()
-            setInputUrl(e.target.value)
+            setInputUrl(e.target.value? e.target.value : rssPlaceHolder)
           }}
           onChange={(e)=>{
             setInputUrl(e.target.value)
