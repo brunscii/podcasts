@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./FeedReader.css"
-import RSSInfoSection from "./RSSInfoSection"
-import React from "react";
-import {EpisodeListItemProps} from "./EpisodeListItem";
+import RSSInfoSection from "./RSSInfoSection.tsx"
+import {EpisodeListItemProps} from "./EpisodeListItem.tsx";
 
 interface RSSInfo {
   title : string;
@@ -28,17 +27,20 @@ async function readRSS( url : string ) : Promise<RSSInfo>{
 
   const episodes : EpisodeListItemProps[] = []
   eps.forEach( e => {
-    // console.log(e.textContent)
+    //  console.log(e.querySelector('subtitle')?.textContent)
+    // let desc= e.querySelector('subtitle')?.textContent ?? e.querySelector('summary')?.textContent ?? 'No Summary'
+    // console.log(desc)
+
     episodes.push({
       title : e.querySelector('title')?.textContent || '',
-      desription: e.querySelector('description')?.textContent || '',
+      desription: e.querySelector('summary')?.textContent || e.querySelector('subtitle')?.textContent || '',
       url: e.querySelector('enclosure')?.textContent || '',
       pubDate: e.querySelector('pubDate')?.textContent || '',
       image: e.querySelector('itunes\\:image')?.getAttribute('href')?.toString() || ''
 
 
     })
-    console.log(e)
+    // console.log(e)
   })
 
   
