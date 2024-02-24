@@ -8,7 +8,7 @@ const path_1 = __importDefault(require("path"));
 const csv_parse_1 = require("csv-parse");
 const fs_1 = __importDefault(require("fs"));
 const app = (0, express_1.default)();
-const port = 3000;
+const PORT = 3000;
 console.log(path_1.default.join(__dirname, 'podcasts.csv'));
 function readPods() {
     const parser = (0, csv_parse_1.parse)({ 'delimiter': ', ', columns: true });
@@ -41,7 +41,7 @@ app.get('/api', (req, res) => {
     // res.send(podDiv)
     res.send(pods);
 });
-app.listen(port, () => {
-    return console.log(`Express is listening at http://localhost:${port}`);
+app.listen(PORT, () => {
+    return console.log(`Express is listening at http://localhost:${PORT}`);
 });
 //# sourceMappingURL=index.js.map

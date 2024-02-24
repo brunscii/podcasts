@@ -2,9 +2,10 @@ import express from 'express';
 import path from 'path';
 import {parse} from 'csv-parse';
 import fs from 'fs';
+
 const app = express();
-const port = 3000;
-console.log(path.join(__dirname, 'podcasts.csv'))
+
+const PORT = 3000;
 
 interface podData {
   name: string,
@@ -24,6 +25,7 @@ function readPods() {
       data = readStream.read()
     }
   })
+  
   console.log('asdf',csv)
   return csv
 
@@ -51,6 +53,6 @@ app.get('/api', (req, res) => {
 
 });
 
-app.listen(port, () => {
-  return console.log(`Express is listening at http://localhost:${port}`);
+app.listen(PORT, () => {
+  return console.log(`Express is listening at http://localhost:${PORT}`);
 });
