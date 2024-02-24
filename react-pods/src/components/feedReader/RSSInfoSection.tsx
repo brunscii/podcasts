@@ -1,4 +1,4 @@
-import EpisodeListItem, { EpisodeListItemProps } from "./EpisodeListItem";
+import EpisodeListItem, { EpisodeListItemProps } from "./EpisodeListItem.tsx";
 
 interface RSSInfoSectionProps{
   title: string;
@@ -14,11 +14,14 @@ function RSSInfoSection( props : RSSInfoSectionProps ){
   return (
     <>
     <div className="rss-info-box">
-      <h2>{props.title}</h2>
-      <span>{ (new Date(props.pubDate) ).toUTCString() }</span>
-      <br />
-      <span>{props.description}</span>
-      <img src={props.imageUrl} alt="podcast IMG" className="rss-info-image" />
+      <div className="rss-info-box-grid">
+        <img src={props.imageUrl} alt="podcast IMG" className="rss-info-image" />
+        <div className="rss-info-box-title-box">
+          <h2>{props.title}</h2>
+          <p>{ props.pubDate }</p>
+          <p>{props.description}</p>
+        </div>
+      </div>
       
     </div>
     <div className="rss-episode-list">

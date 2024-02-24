@@ -29,14 +29,15 @@ async function readRSS( url : string ) : Promise<RSSInfo>{
   eps.forEach( e => {
     //  console.log(e.querySelector('subtitle')?.textContent)
     // let desc= e.querySelector('subtitle')?.textContent ?? e.querySelector('summary')?.textContent ?? 'No Summary'
-    // console.log(desc)
+    // console.log(e.querySelector('image')?.getAttribute('href'))
 
     episodes.push({
       title : e.querySelector('title')?.textContent || '',
-      desription: e.querySelector('summary')?.textContent || e.querySelector('subtitle')?.textContent || '',
+      desription: e.querySelector('subtitle')?.textContent || parser.parseFromString(e.querySelector('summary')?.textContent || "", 'text/html').querySelector('p')?.textContent || '',
       url: e.querySelector('enclosure')?.textContent || '',
       pubDate: e.querySelector('pubDate')?.textContent || '',
-      image: e.querySelector('itunes\\:image')?.getAttribute('href')?.toString() || ''
+      duration: e.querySelector('duration')?.textContent || '',
+      image: e.querySelector('image')?.getAttribute('href') || rssData.querySelector('channel>image>url')?.textContent || ''
 
 
     })
@@ -49,7 +50,7 @@ async function readRSS( url : string ) : Promise<RSSInfo>{
 
   return {
     title: rssData.querySelector('channel>title')?.textContent || 'No Title Data',
-    pubDate: rssData.querySelector('channel>pubDate')?.textContent || 'N/A',
+    pubDate: rssData.querySelector('channel>pubDate')?.textContent ?? rssData.querySelector('lastBuildDate')?.textContent ?? 'N/A',
     summary: rssData.querySelector('channel>summary')?.textContent || '',
     imageUrl: rssData.querySelector('channel>image>url')?.textContent || '',
 
@@ -94,12 +95,12 @@ function FeedReader() {
           }}
         />
       </div>
+      </div>
       <div className="rss-content">
         {rssInfoComponent}
         <div className="rss-episode-list">
           {rssEpisodes}
         </div>
-      </div>
     </div>
     </>
   )

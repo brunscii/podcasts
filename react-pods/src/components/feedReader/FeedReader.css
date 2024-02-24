@@ -5,14 +5,39 @@
   }
   to{
     top: 0%;
-    left: 0%;
+    left: 2.8em;
   }
+}
+
+.rss-content{
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .rss-episode-list {
   color:inherit;
   overflow-y: auto;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+  max-width: 90%;
+  justify-content: center;
+}
+
+.rss-info-box{
+  display: flex;
+  max-height: 100%;
+  max-width: 90%;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.rss-info-box-grid{
+  display: grid;
+  grid-template-columns: auto 4fr;
+  
 }
 
 .rss-input-box {
@@ -25,10 +50,11 @@
   /* width: 100%; */
   /* width:100vw; */
   justify-items: center;
+  max-width:min-content;
 }
 
 .rss-input-box.topped{
-  animation: moveUp .5s forwards;
+  animation: 1s moveUp .5s forwards;
 }
 
 label{
@@ -41,15 +67,34 @@ label{
   width: 12em;
 }
 
-.rss-info-box{
+.episode-list-item{
+
   display: flex;
-  max-height: 100%;
   flex-direction: column;
-  overflow-y: auto;
+  border: thin #333 ridge;
+  border-radius: 5px;
+  padding-inline: .5em;
+  padding-top: .2em;
+  /* max-height: 12rem; */
+
+  /* overflow: auto; */
 }
 
-.episode-list-item{
-  max-height: 10rem;
-  overflow: hidden;
+.episode-title{
+  margin: 0;
+}
 
+/* .episode-title-box{
+  margin-inline: 1em;
+} */
+
+.episode-img{
+  aspect-ratio: 1;
+  max-width: 5rem;
+}
+
+.episode-list-item-img-title-grid{
+  display: grid;
+  grid-template-columns: auto 4fr;
+  gap: 1em;
 }

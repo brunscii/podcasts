@@ -6,16 +6,17 @@
 }
 
 .react-pods {
+  justify-self: center;
   max-width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: auto 8fr;
+  grid-template-columns: max-content 8fr;
+
   /* overflow: scroll; */
 }
 
 .selection-viewer {
   padding: 2em;
-  display:block;
-  max-width: 100%;
+  /* max-width: 100%; */
   overflow-y: auto;
 }
