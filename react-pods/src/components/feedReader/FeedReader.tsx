@@ -85,7 +85,9 @@ function FeedReader() {
 
           onKeyDown={(e)=>{
             if( e.key == 'Enter'){
-              let rssData = readRSS(inputUrl)              
+              // let rssData = readRSS(inputUrl)      
+              // TODO change to where if this removes if they type anything
+                      
               document.querySelector('.rss-input-box')?.classList.add('topped')
               readRSS(inputUrl).then( (rssData) => {
                 setRssInfoComponent( (prevComponents) => [ <RSSInfoSection title={rssData.title} description={rssData.summary} pubDate={rssData.pubDate} imageUrl={rssData.imageUrl} episodes={rssData.episodes}  /> ])

@@ -1,12 +1,22 @@
 @keyframes moveUp {
-  from{
-    top: 50%;
-    left: 40%;
-  }
-  to{
+  100%{
     top: 0%;
-    left: 2.8em;
+    left: 5%;
   }
+}
+
+.rss-input-box {
+  position:relative;
+  left: 40%;
+  top: 50%;
+  justify-items: center;
+  max-width:min-content;
+}
+
+.rss-input-box.topped{
+  animation: 150ms linear moveUp forwards;
+  /* top: 0%;
+  left: 5%; */
 }
 
 .rss-content{
@@ -40,22 +50,6 @@
   
 }
 
-.rss-input-box {
-  /* display: grid; */
-  /* place-items: center; */
-  position:relative;
-  left: 40%;
-  top: 50%;
-  /* height: 100vh; */
-  /* width: 100%; */
-  /* width:100vw; */
-  justify-items: center;
-  max-width:min-content;
-}
-
-.rss-input-box.topped{
-  animation: 1s moveUp .5s forwards;
-}
 
 label{
   display: block;
