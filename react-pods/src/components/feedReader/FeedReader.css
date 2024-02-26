@@ -92,3 +92,7 @@ label{
   grid-template-columns: auto 4fr;
   gap: 1em;
 }
+
+.episode-pubDate{
+  margin: 0;
+}
