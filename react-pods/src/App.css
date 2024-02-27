@@ -20,3 +20,7 @@
   /* max-width: 100%; */
   overflow-y: auto;
 }
+.hidden{
+  /* display: none; */
+  visibility: hidden;
+}
