@@ -9,7 +9,6 @@ const csv_parse_1 = require("csv-parse");
 const fs_1 = __importDefault(require("fs"));
 const app = (0, express_1.default)();
 const PORT = 3000;
-console.log(path_1.default.join(__dirname, 'podcasts.csv'));
 function readPods() {
     const parser = (0, csv_parse_1.parse)({ 'delimiter': ', ', columns: true });
     const readStream = fs_1.default.createReadStream(path_1.default.join(__dirname, 'podcasts.csv')).pipe(parser);

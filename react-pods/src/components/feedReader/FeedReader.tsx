@@ -34,7 +34,7 @@ async function readRSS( url : string ) : Promise<RSSInfo>{
     episodes.push({
       title : e.querySelector('title')?.textContent || '',
       desription: e.querySelector('subtitle')?.textContent || parser.parseFromString(e.querySelector('summary')?.textContent || "", 'text/html').querySelector('p')?.textContent || '',
-      url: e.querySelector('enclosure')?.textContent || '',
+      url: e.querySelector('enclosure')?.getAttribute('url') || '',
       pubDate: e.querySelector('pubDate')?.textContent || '',
       duration: e.querySelector('duration')?.textContent || '',
       image: e.querySelector('image')?.getAttribute('href') || rssData.querySelector('channel>image>url')?.textContent || ''
@@ -53,7 +53,7 @@ async function readRSS( url : string ) : Promise<RSSInfo>{
     pubDate: rssData.querySelector('channel>pubDate')?.textContent ?? rssData.querySelector('lastBuildDate')?.textContent ?? 'N/A',
     summary: rssData.querySelector('channel>summary')?.textContent || '',
     imageUrl: rssData.querySelector('channel>image>url')?.textContent || '',
-
+    
 
     episodes: episodes
     
@@ -71,7 +71,7 @@ function FeedReader() {
 
   return (
     <>
-    <div className='rss-input-box' >
+    <div className='rss-input-box hidden' >
       <div className="rss-input">
         <label htmlFor="rss-input">Enter a RSS URL</label>
         <input title="rss-input" type="url" name="rss-input" id="rss-input" placeholder={rssPlaceHolder} value={inputUrl} 

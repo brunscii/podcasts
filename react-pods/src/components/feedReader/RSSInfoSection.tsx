@@ -30,6 +30,7 @@ function RSSInfoSection( props : RSSInfoSectionProps ){
           return (<EpisodeListItem title={episode.title} desription={episode.desription} pubDate={episode.pubDate} url={episode.url} image={episode.image} />)
         })
       }
+      //add pagination buttons here
     </div>
    
     </>

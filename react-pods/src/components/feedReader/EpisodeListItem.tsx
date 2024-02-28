@@ -27,6 +27,7 @@ function EpisodeListItem( props: EpisodeListItemProps ) {
             <h3 className="episode-title">{props.title}</h3>
             {props.pubDate ? <p className="episode-pubDate">{props.pubDate}</p> :  null }
             {props.duration ? <p className="episode-duration">{props.duration}</p> : null }
+            {props.url ? <a href={props.url} target='_blank'>Play</a> : null}
           </div>
 
         </div>
