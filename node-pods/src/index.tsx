@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'path';
 import {parse} from 'csv-parse';
 import fs from 'fs';
-
+const cors = require('cors');
 const app = express();
 
 const PORT = 3000;
@@ -32,6 +32,8 @@ function readPods() {
 }
 
 const pods = readPods()
+app.use(cors());
+app.use(express.json())
 
 app.get('/', (_req, res) => {
   res.send('Hello World!');
@@ -39,18 +41,16 @@ app.get('/', (_req, res) => {
 
 app.get('/api', (req, res) => {
   console.log('requested api')
-
-  
-  
-  // let podDiv = ''
-  // for( let p of pods ){
-  //   podDiv = podDiv + `<a href=${p.link}>${p.link}</a><br/>`
-  //   console.log(p)
-  // }
-  // // console.log(pods)
-  // res.send(podDiv)
+ 
   res.send(pods)
+  
 
+});
+
+app.post('/api/add-feed', (req,res)=>{
+  const newFeed = req.body;
+  res.status(200).json({ message: 'Data received'})
+  console.log(req.body)
 });
 
 app.listen(PORT, () => {
