@@ -14,7 +14,7 @@ function EpisodeListItem( props: EpisodeListItemProps ) {
 
   // let parser : DOMParser = new DOMParser()
   // let description:Document = parser.parseFromString(props.desription,"text/html")
-  console.log(props.image)
+  // console.log(props.image)
   return (
     <>
       <div className='episode-list-item'>

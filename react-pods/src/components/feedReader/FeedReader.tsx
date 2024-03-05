@@ -18,8 +18,8 @@ function isValidRss( url : string ){
 
 async function readRSS( url : string ) : Promise<RSSInfo>{
 
-  const rssRes = await fetch(url)
-  const rssXML = await rssRes.text()
+  const rssRes = await fetch(url);
+  const rssXML = await rssRes.text();
 
   const parser = new DOMParser()
   const rssData = parser.parseFromString(rssXML, 'application/xhtml+xml')
@@ -71,7 +71,7 @@ function FeedReader() {
 
   return (
     <>
-    <div className='rss-input-box hidden' >
+    <div className='rss-input-box ' >
       <div className="rss-input">
         <label htmlFor="rss-input">Enter a RSS URL</label>
         <input title="rss-input" type="url" name="rss-input" id="rss-input" placeholder={rssPlaceHolder} value={inputUrl} 
@@ -90,7 +90,12 @@ function FeedReader() {
                       
               document.querySelector('.rss-input-box')?.classList.add('topped')
               readRSS(inputUrl).then( (rssData) => {
-                setRssInfoComponent( (prevComponents) => [ <RSSInfoSection title={rssData.title} description={rssData.summary} pubDate={rssData.pubDate} imageUrl={rssData.imageUrl} episodes={rssData.episodes}  /> ])
+                setRssInfoComponent( (prevComponents) => [ <RSSInfoSection url={inputUrl}
+                                                                           title={rssData.title} 
+                                                                           description={rssData.summary} 
+                                                                           pubDate={rssData.pubDate} 
+                                                                           imageUrl={rssData.imageUrl} 
+                                                                           episodes={rssData.episodes}  /> ])
                 
               })
             }
