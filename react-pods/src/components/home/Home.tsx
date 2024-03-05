@@ -5,7 +5,15 @@
   We will also display any feeds such as the newest episodes...maybe
 */
 
+import PodcastScrollableList from "./PodcastScrollableList.tsx"
 
+interface PodcastScrollableListProps{
+  pods: {
+    name: string
+    image: string
+  } []
+  
+}
 
 async function fetchAPI( url? : string){
   const req = await fetch(url ?? '127.0.0.1:3000/api')
@@ -17,7 +25,10 @@ async function fetchAPI( url? : string){
 function Home(){
   fetchAPI()
   return <>
-
+    <h2>Podcasts</h2>
+    <PodcastScrollableList />
+    <h2>New Episodes</h2>
+    
   </>
 }
 
