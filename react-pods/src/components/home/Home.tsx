@@ -25,9 +25,11 @@ async function fetchAPI( url? : string){
 function Home(){
   fetchAPI()
   return <>
+  <div className="home-screen">
     <h2>Podcasts</h2>
     <PodcastScrollableList />
     <h2>New Episodes</h2>
+  </div>
     
   </>
 }
