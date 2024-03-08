@@ -12,14 +12,14 @@ function selectThis( selector: string ){
             document.querySelector('.downloads-screen')?.classList.add('hidden')
             document.querySelector('.feed-reader')?.classList.remove('hidden')
             break;
-            case 'downloads-screen':
-                document.querySelector('.home-screen')?.classList.add('hidden')
-                document.querySelector('.feed-reader')?.classList.add('hidden')
-                document.querySelector('.downloads-screen')?.classList.remove('hidden')
+        case 'downloads-screen':
+            document.querySelector('.home-screen')?.classList.add('hidden')
+            document.querySelector('.feed-reader')?.classList.add('hidden')
+            document.querySelector('.downloads-screen')?.classList.remove('hidden')
             break;
-            default:
-                document.querySelector('.home-screen')?.classList.add('hidden')
-                document.querySelector('.feed-reader')?.classList.add('hidden')
+        default:
+            document.querySelector('.home-screen')?.classList.add('hidden')
+            document.querySelector('.feed-reader')?.classList.add('hidden')
             document.querySelector('.downloads-screen')?.classList.add('hidden')
             break;
 
