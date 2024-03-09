@@ -5,11 +5,19 @@
   }
 }
 
+.feed-reader{
+
+  height: 100dvh;
+  width: calc( 100dvw - 7em);
+  /* justify-items: center; */
+  position: absolute;
+}
+
 .rss-input-box {
+  
   position:relative;
   left: 40%;
   top: 50%;
-  justify-items: center;
   max-width:min-content;
 }
 

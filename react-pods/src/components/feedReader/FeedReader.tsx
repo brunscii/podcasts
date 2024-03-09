@@ -85,49 +85,52 @@ function FeedReader() {
 
   return (
     <>
-    <div className='rss-input-box feed-reader' >
-      <div className="rss-input">
-        <label htmlFor="rss-input">Enter a RSS URL</label>
-        <input title="rss-input" type="url" name="rss-input" id="rss-input" placeholder={rssPlaceHolder} value={inputUrl} 
+      <div className="feed-reader">
+        <div className='rss-input-box' >
+          <div className="rss-input">
+            <label htmlFor="rss-input">Enter a RSS URL</label>
+            <input title="rss-input" type="url" name="rss-input" id="rss-input" placeholder={rssPlaceHolder} value={inputUrl} 
 
-          onFocus={(e)=>{
-            setInputUrl(e.target.value? e.target.value : rssPlaceHolder)
-          }}
-          onChange={(e)=>{
-            setInputUrl(e.target.value)
-          }}
+              onFocus={(e)=>{
+                setInputUrl(e.target.value? e.target.value : rssPlaceHolder)
+              }}
+              onChange={(e)=>{
+                setInputUrl(e.target.value)
+              }}
 
-          onKeyDown={(e)=>{
-            if( e.key == 'Enter'){
-              // let rssData = readRSS(inputUrl)      
-              // TODO change to where if this removes if they type anything
-                      
-              readRSS(inputUrl).then( (rssData) => {
-                if(rssData.title == 'No Title Data' && rssData.summary == 'N/A' && rssData.pubDate == 'N/A' && rssData.imageUrl == 'N/A' && rssData.episodes.length == 0 ){
-                  setRssInfoComponent( [<></>] )
-                }else {
-                  document.querySelector('.rss-input-box')?.classList.add('topped')
-                  setRssInfoComponent( (prevComponents) => [ <RSSInfoSection url={inputUrl}
-                    title={rssData.title} 
-                    description={rssData.summary} 
-                    pubDate={rssData.pubDate} 
-                    imageUrl={rssData.imageUrl} 
-                    episodes={rssData.episodes}  /> ])
-                  }
-                
-              })
-            }
-          }}
-        />
-      </div>
-      </div>
-      <div className="rss-content">
-        {rssInfoComponent}
-        <div className="rss-episode-list">
-          {rssEpisodes}
+              onKeyDown={(e)=>{
+                if( e.key == 'Enter'){
+                  // let rssData = readRSS(inputUrl)      
+                  // TODO change to where if this removes if they type anything
+                          
+                  readRSS(inputUrl).then( (rssData) => {
+                    if(rssData.title == 'No Title Data' && rssData.summary == 'N/A' && rssData.pubDate == 'N/A' && rssData.imageUrl == 'N/A' && rssData.episodes.length == 0 ){
+                      setRssInfoComponent( [<></>] )
+                      document.querySelector('.rss-input-box')?.classList.remove('topped')
+                    }else {
+                      document.querySelector('.rss-input-box')?.classList.add('topped')
+                      setRssInfoComponent( (_prevComponents) => [ <RSSInfoSection url={inputUrl}
+                        title={rssData.title} 
+                        description={rssData.summary} 
+                        pubDate={rssData.pubDate} 
+                        imageUrl={rssData.imageUrl} 
+                        episodes={rssData.episodes}  /> ])
+                      }
+                    
+                  })
+                }
+              }}
+            />
+          </div>
+          </div>
+          <div className="rss-content">
+            {rssInfoComponent}
+            <div className="rss-episode-list">
+              {rssEpisodes}
+            </div>
         </div>
-    </div>
+      </div>
     </>
-  )
+    )
 }
 export default FeedReader
