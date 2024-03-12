@@ -18,7 +18,7 @@ function DownloadDisplay( props : DownloadDisplayProps ) {
   
 
   return (
-    <div className = { props.className ? props.className : ''}>
+    <div className = 'Downloads hidden'>
 
     </div>
   )

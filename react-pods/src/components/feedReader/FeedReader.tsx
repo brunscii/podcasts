@@ -85,7 +85,7 @@ function FeedReader() {
 
   return (
     <>
-      <div className="feed-reader">
+      <div className="feed-reader hidden">
         <div className='rss-input-box' >
           <div className="rss-input">
             <label htmlFor="rss-input">Enter a RSS URL</label>
