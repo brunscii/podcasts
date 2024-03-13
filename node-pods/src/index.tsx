@@ -12,23 +12,29 @@ interface podData {
   link: string
 }
 
-function readPods() {
+async function readPods() : Promise<podData[]> {
   const parser  = parse( {'delimiter': ', ', columns: true} )
   const readStream = fs.createReadStream( path.join(__dirname, 'podcasts.csv') ).pipe(parser);
-  let csv : podData[] = []
-  readStream.on('readable',()=>{
-    let data = readStream.read()
-    while(data != null){
-      csv.push( {name: data.name,
-                 link: data.link} )
-      console.log(data.link)
-      data = readStream.read()
-    }
-  })
-  
-  console.log('asdf',csv)
-  return csv
+  const csv : podData[] = []
+  // readStream.on('readable',()=>{
+  //   let data = readStream.read()
+  //   while(data != null){
+  //     // console.log(data)
+  //     csv.push( data )
+  //     data = readStream.read()
+  //   }
+  // })
+  for await( const data of readStream ){
+    csv.push(data)
+  }
 
+  // readStream.destroy()
+  
+  // console.log('asdf',csv)
+  // setTimeout( () => console.log('-------------------',csv), 500)
+  // await console.log(csv)
+  return csv
+  
 }
 
 function updatePodcasts( pod : {name: string; link: string; } ){
@@ -37,8 +43,7 @@ function updatePodcasts( pod : {name: string; link: string; } ){
   })
 }
 
-const pods = readPods()
-
+// const pods = readPods()
 
 app.use(cors());
 app.use(express.json())
@@ -49,24 +54,41 @@ app.get('/', (_req, res) => {
 
 app.get('/api', (req, res) => {
   console.log('requested api')
- 
-  res.send(pods)
+  setTimeout( () => readPods().then( pods => res.send(pods)), 100)
   
 
 });
 
 app.post('/api/add-feed', (req,res)=>{
-  const newFeed = req.body;
-  const podset = {}
-  const pods = new Set<podData>( readPods() )
+  const newFeed : podData = req.body;
+  const podset = new Set()
+
+  readPods().then(pods => {
+    pods.forEach( pod => {
+      podset.add(pod.link)
+      // console.log(pod) 
+    })
+  })
+  
+  setTimeout( ()=>{
+
+    console.log('-=-=-=-==-=-=-=-=-=-=-=- Podset',podset)
+    if( !podset.has(newFeed.link) ){
+      updatePodcasts(newFeed)
+    }
+  }, 100)
+
+
 
 
   res.status(200).json({ message: 'Data received'})
-  console.log(newFeed.link)
-  if( !pods.has(newFeed) )
-    updatePodcasts( newFeed )
+
+  // if( !podset.has(newFeed.link) ){
+  //   console.log(`${newFeed.link} not found in set`)
+  //   updatePodcasts( newFeed )
+  // }
 });
 
 app.listen(PORT, () => {
-  return console.log(`Express is listening at http://localhost:${PORT}`);
+  return console.log(`Express is listening at http://localhost:${PORT}`)
 });
