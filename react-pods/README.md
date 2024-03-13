@@ -21,3 +21,18 @@ Possible feature improvements
 - live streams
 - boosts
 - sharing subscriptions lists
+- add a color/shading to show what is selected in the nav --> like a selected class and darker bg
+- audio player for pods
+    - add controls
+        - play/pause button
+        - fast forward/skip 30
+        - rewind/back 10
+        - next in queue button
+    - save current play time in local storage to save state periodically
+    - timer shows current play time and time remainig as well as total runtime
+    - tracker style slider for play location
+
+Bug Fixes
+- Check for duplicates on loading of rss list
+- check for updates to the list or signal an update to the home screen when adding a rss feed to the list (clicking sub or + button)
+- fix the input box in rss lookup moving when changing nav selection
