@@ -26,6 +26,11 @@ function readPods() {
     console.log('asdf', csv);
     return csv;
 }
+function updatePodcasts(pod) {
+    fs_1.default.appendFile(path_1.default.join(__dirname, 'podcasts.csv'), `\n"${pod.name}", ${pod.link}\n`, (err) => {
+        console.error(err);
+    });
+}
 const pods = readPods();
 app.use(cors());
 app.use(express_1.default.json());
@@ -38,8 +43,12 @@ app.get('/api', (req, res) => {
 });
 app.post('/api/add-feed', (req, res) => {
     const newFeed = req.body;
+    const podset = {};
+    const pods = new Set(readPods());
     res.status(200).json({ message: 'Data received' });
-    console.log(req.body);
+    console.log(newFeed.link);
+    if (!pods.has(newFeed))
+        updatePodcasts(newFeed);
 });
 app.listen(PORT, () => {
     return console.log(`Express is listening at http://localhost:${PORT}`);

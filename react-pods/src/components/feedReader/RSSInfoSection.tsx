@@ -41,14 +41,17 @@ function RSSInfoSection( props : RSSInfoSectionProps ){
         <img src={props.imageUrl} alt="podcast IMG" className="rss-info-image" />
         <div className="rss-info-box-title-box">
           
-          <button className="add-feed-button" onClick={ (e)=>{
-            // console.log(props.url)
-            addFeed('http://localhost:3000/api/add-feed', props.url, props.title)
-          }}>+</button>
+          
 
           <h2>{props.title}</h2>
-          <p>{ props.pubDate }</p>
-          <p>{props.description}</p>
+          <div className="date-and-sub">
+            <p>{ new Date(props.pubDate).toLocaleDateString() }</p>
+            <button className="add-feed-button" onClick={ (e)=>{
+              // console.log(props.url)
+              addFeed('http://localhost:3000/api/add-feed', props.title, props.url)
+            }}>+</button>
+          </div>
+          <p className="rss-info-box-description">{props.description}</p>
         </div>
       </div>
       
@@ -58,7 +61,7 @@ function RSSInfoSection( props : RSSInfoSectionProps ){
         props.episodes?.map( (episode)=>{
           return (<EpisodeListItem title={episode.title} 
                                    desription={episode.desription} 
-                                   pubDate={episode.pubDate} 
+                                   pubDate={new Date(episode.pubDate || '').toLocaleDateString()} 
                                    url={episode.url} 
                                    image={episode.image} />)
         })

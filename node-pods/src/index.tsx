@@ -31,7 +31,15 @@ function readPods() {
 
 }
 
+function updatePodcasts( pod : {name: string; link: string; } ){
+  fs.appendFile( path.join(__dirname, 'podcasts.csv'), `\n"${pod.name}", ${pod.link}\n`, (err)=>{
+    console.error(err)
+  })
+}
+
 const pods = readPods()
+
+
 app.use(cors());
 app.use(express.json())
 
@@ -49,8 +57,14 @@ app.get('/api', (req, res) => {
 
 app.post('/api/add-feed', (req,res)=>{
   const newFeed = req.body;
+  const podset = {}
+  const pods = new Set<podData>( readPods() )
+
+
   res.status(200).json({ message: 'Data received'})
-  console.log(req.body)
+  console.log(newFeed.link)
+  if( !pods.has(newFeed) )
+    updatePodcasts( newFeed )
 });
 
 app.listen(PORT, () => {
