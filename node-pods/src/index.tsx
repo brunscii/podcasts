@@ -32,7 +32,7 @@ function readPods() {
 }
 
 function updatePodcasts( pod : {name: string; link: string; } ){
-  fs.appendFile( path.join(__dirname, 'podcasts.csv'), `\n"${pod.name}", ${pod.link}\n`, (err)=>{
+  fs.appendFile( path.join(__dirname, 'podcasts.csv'), `\n"${pod.name}", ${pod.link}`, (err)=>{
     console.error(err)
   })
 }

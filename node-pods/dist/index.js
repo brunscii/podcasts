@@ -27,7 +27,7 @@ function readPods() {
     return csv;
 }
 function updatePodcasts(pod) {
-    fs_1.default.appendFile(path_1.default.join(__dirname, 'podcasts.csv'), `\n"${pod.name}", ${pod.link}\n`, (err) => {
+    fs_1.default.appendFile(path_1.default.join(__dirname, 'podcasts.csv'), `\n"${pod.name}", ${pod.link}`, (err) => {
         console.error(err);
     });
 }
