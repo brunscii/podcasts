@@ -46,7 +46,7 @@ function RSSInfoSection( props : RSSInfoSectionProps ){
           <h2>{props.title}</h2>
           <div className="date-and-sub">
             <p>{ new Date(props.pubDate).toLocaleDateString() }</p>
-            <button className="add-feed-button" onClick={ (e)=>{
+            <button className="add-feed-button" onClick={ (_e)=>{
               // console.log(props.url)
               addFeed('http://localhost:3000/api/add-feed', props.title, props.url)
             }}>+</button>
