@@ -37,7 +37,7 @@ function Home(){
   // fetchAPI().then( pods => setPods(pods) )
   console.log(pods)
   return <>
-  <div className="home-screen">
+  <div className="home-display">
     <h2>Podcasts</h2>
     {/* <PodcastScrollableList podcasts={pods} /> */}
     {pods}

@@ -31,3 +31,7 @@ ul {
 .navbar>ul>li:hover {
   background-color: darkgreen;
 }
+
+.nav-selected{
+  background-color: #00640088;
+}

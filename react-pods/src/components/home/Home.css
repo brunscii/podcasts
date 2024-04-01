@@ -3,7 +3,7 @@
     grid-template-columns: 1fr 1fr;
 }
 
-.home-screen{
+.home-display{
     max-width: 90%;
     display: grid;
     align-items: center;
