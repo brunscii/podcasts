@@ -28,7 +28,7 @@ ul {
   justify-content: center;
 }
 
-.navbar>ul>li:hover {
+.navbar>ul>li:hover:not(.nav-selected) {
   background-color: darkgreen;
 }
 
