@@ -3,12 +3,13 @@ import "./FeedReader.css"
 import RSSInfoSection from "./RSSInfoSection.tsx"
 import {EpisodeListItemProps} from "./EpisodeListItem.tsx";
 
-interface RSSInfo {
+export interface RSSInfo {
   title : string;
   pubDate: string;
   summary: string;
   imageUrl: string;
-  episodes: EpisodeListItemProps[]
+  url: string;
+  episodes?: EpisodeListItemProps[]
 }
 
 function isValidRss( url : string ){
@@ -16,7 +17,7 @@ function isValidRss( url : string ){
 
 }
 
-async function readRSS( url : string ) : Promise<RSSInfo>{
+export async function readRSS( url : string ) : Promise<RSSInfo>{
 
   try{
 
@@ -51,6 +52,7 @@ async function readRSS( url : string ) : Promise<RSSInfo>{
     
     return {
       title: rssData.querySelector('channel>title')?.textContent || 'No Title Data',
+      url: url,
       pubDate: rssData.querySelector('channel>pubDate')?.textContent ?? rssData.querySelector('lastBuildDate')?.textContent ?? 'N/A',
       summary: rssData.querySelector('channel>summary')?.textContent || 'N/A',
       imageUrl: rssData.querySelector('channel>image>url')?.textContent || 'N/A',
@@ -63,6 +65,7 @@ async function readRSS( url : string ) : Promise<RSSInfo>{
     console.error(e)
     return {
       title: 'No Title Data',
+      url: url,
       pubDate: 'N/A',
       summary: 'N/A',
       imageUrl:'N/A',
