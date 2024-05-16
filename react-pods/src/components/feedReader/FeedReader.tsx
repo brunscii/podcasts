@@ -13,6 +13,7 @@ export interface RSSInfo {
 }
 
 function isValidRss( url : string ){
+  console.log(url)
   /*Checks to see if the given url contains a valid RSS feed */
 
 }
@@ -107,7 +108,7 @@ function FeedReader() {
                   // TODO change to where if this removes if they type anything
                           
                   readRSS(inputUrl).then( (rssData) => {
-                    if(rssData.title == 'No Title Data' && rssData.summary == 'N/A' && rssData.pubDate == 'N/A' && rssData.imageUrl == 'N/A' && rssData.episodes.length == 0 ){
+                    if(rssData.title == 'No Title Data' && rssData.summary == 'N/A' && rssData.pubDate == 'N/A' && rssData.imageUrl == 'N/A' && rssData.episodes?.length == 0 ){
                       setRssInfoComponent( [<></>] )
                       document.querySelector('.rss-input-box')?.classList.remove('topped')
                     }else {

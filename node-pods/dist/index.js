@@ -27,8 +27,8 @@ const cors = require('cors');
 const app = (0, express_1.default)();
 const PORT = 3000;
 function readPods() {
+    var _a, e_1, _b, _c;
     return __awaiter(this, void 0, void 0, function* () {
-        var _a, e_1, _b, _c;
         const parser = (0, csv_parse_1.parse)({ 'delimiter': ', ', columns: true });
         const readStream = fs_1.default.createReadStream(path_1.default.join(__dirname, 'podcasts.csv')).pipe(parser);
         const csv = [];
