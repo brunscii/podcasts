@@ -3,20 +3,22 @@ import "./FeedReader.css"
 import RSSInfoSection from "./RSSInfoSection.tsx"
 import {EpisodeListItemProps} from "./EpisodeListItem.tsx";
 
-interface RSSInfo {
+export interface RSSInfo {
   title : string;
   pubDate: string;
   summary: string;
   imageUrl: string;
-  episodes: EpisodeListItemProps[]
+  url: string;
+  episodes?: EpisodeListItemProps[]
 }
 
 function isValidRss( url : string ){
+  console.log(url)
   /*Checks to see if the given url contains a valid RSS feed */
 
 }
 
-async function readRSS( url : string ) : Promise<RSSInfo>{
+export async function readRSS( url : string ) : Promise<RSSInfo>{
 
   try{
 
@@ -51,6 +53,7 @@ async function readRSS( url : string ) : Promise<RSSInfo>{
     
     return {
       title: rssData.querySelector('channel>title')?.textContent || 'No Title Data',
+      url: url,
       pubDate: rssData.querySelector('channel>pubDate')?.textContent ?? rssData.querySelector('lastBuildDate')?.textContent ?? 'N/A',
       summary: rssData.querySelector('channel>summary')?.textContent || 'N/A',
       imageUrl: rssData.querySelector('channel>image>url')?.textContent || 'N/A',
@@ -63,6 +66,7 @@ async function readRSS( url : string ) : Promise<RSSInfo>{
     console.error(e)
     return {
       title: 'No Title Data',
+      url: url,
       pubDate: 'N/A',
       summary: 'N/A',
       imageUrl:'N/A',
@@ -104,7 +108,7 @@ function FeedReader() {
                   // TODO change to where if this removes if they type anything
                           
                   readRSS(inputUrl).then( (rssData) => {
-                    if(rssData.title == 'No Title Data' && rssData.summary == 'N/A' && rssData.pubDate == 'N/A' && rssData.imageUrl == 'N/A' && rssData.episodes.length == 0 ){
+                    if(rssData.title == 'No Title Data' && rssData.summary == 'N/A' && rssData.pubDate == 'N/A' && rssData.imageUrl == 'N/A' && rssData.episodes?.length == 0 ){
                       setRssInfoComponent( [<></>] )
                       document.querySelector('.rss-input-box')?.classList.remove('topped')
                     }else {

@@ -15,10 +15,10 @@ interface DownloadDisplayProps {
 }
 
 function DownloadDisplay( props : DownloadDisplayProps ) {
-  
+  console.log([props])
 
   return (
-    <div className = 'Downloads hidden'>
+    <div className = 'downloads-display hidden'>
 
     </div>
   )

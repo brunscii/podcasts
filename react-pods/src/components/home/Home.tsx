@@ -7,7 +7,9 @@
 
 import { useState, useEffect } from "react"
 import './Home.css'
-import PodcastScrollableList from "./PodcastScrollableList.tsx"
+import PodcastDropDown from "./PodcastDropDown.tsx"
+import RSSInfoSection from "../feedReader/RSSInfoSection.tsx"
+import { readRSS } from "../feedReader/FeedReader.tsx"
 
 async function fetchAPI( url? : string) : Promise<JSX.Element[]> {
   const req = await fetch(url ?? 'http://localhost:3000/api')
@@ -17,11 +19,15 @@ async function fetchAPI( url? : string) : Promise<JSX.Element[]> {
 
   const pods : JSX.Element[] = []
   res.map( (pod : {name: string; link: string} )=>{
+    // readRSS(pod.link).then(data =>{
+    //   pods.push(PodcastDropDown(data))
+    //   console.log(data)
+    // })
     pods.push(
     <div className="podcast-list-item">
       <span>{pod.name}</span> <a href={pod.link}>{pod.link}</a>
     </div>)
-  }) 
+  })
 
   return pods
 }
@@ -37,7 +43,7 @@ function Home(){
   // fetchAPI().then( pods => setPods(pods) )
   console.log(pods)
   return <>
-  <div className="home-screen">
+  <div className="home-display">
     <h2>Podcasts</h2>
     {/* <PodcastScrollableList podcasts={pods} /> */}
     {pods}

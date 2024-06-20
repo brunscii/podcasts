@@ -1,9 +1,9 @@
 .podcast-list-item{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
 }
 
-.home-screen{
+.home-display{
     max-width: 90%;
     display: grid;
     align-items: center;
