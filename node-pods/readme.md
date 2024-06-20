@@ -11,7 +11,7 @@ The data that we will need for the podcast app is
     - link
     - category
     - pubDate
-- Application Specific
+- Application Specifics
     - played
     - list of Podcasts ( subscriptions )
     - qeued
@@ -25,12 +25,7 @@ if so, where do we store that information?
 - in a single file?
 - dl the rss data directly?
 - json file to load as an object?
-
-If so, should it have a timer to do updates to the data? What time interval? 
-- 30 min?
-- 1 hour?
-- on demand?
-- Depends on the server cost and compute time?
+- just in memory?
 
 ### Routes
 
